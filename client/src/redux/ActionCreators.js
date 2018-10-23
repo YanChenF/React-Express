@@ -1,5 +1,5 @@
 import * as ActionTypes from './ActionTypes';
-import { baseUrl } from '../shared/baseUrl';
+import { apiCallUrl } from '../shared/baseUrl';
 
 export const addComment = (comment) => {
     return ({
@@ -13,7 +13,7 @@ export const postComment = (dishId, comment, rating) => (dispatch => {
     newComment.date = new Date().toISOString();
     const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    fetch(baseUrl + 'comments', {
+    fetch(apiCallUrl + 'comments', {
         method: "POST",
         body: JSON.stringify(newComment),
         headers: {
@@ -40,7 +40,7 @@ export const postComment = (dishId, comment, rating) => (dispatch => {
 export const fetchDishes = () => (dispatch => {
     dispatch(dishesLoading(true));
 
-    fetch(baseUrl + 'dishes')
+    fetch(apiCallUrl + 'dishes')
     .then(response => {
         if(response.ok) return response;
         var error = new Error('Error: ' + response.status + response.statusText);
@@ -72,7 +72,7 @@ export const addDishes = (dishes) => ({
 
 //fectch comments data
 export const fetchComments = () => (dispatch => {
-    fetch(baseUrl + 'comments')
+    fetch(apiCallUrl + 'comments')
     .then(response => {
         if(response.ok) return response;
         var error = new Error('Error: ' + response.status + response.statusText);
@@ -102,7 +102,7 @@ export const addComments = (comments) => ({
 export const fetchPromos = () => (dispatch => {
     dispatch(promosLoading(true));
 
-    fetch(baseUrl + 'promotions')
+    fetch(apiCallUrl + 'promotions')
     .then(response => {
         if(response.ok) return response;
         var error = new Error('Error: ' + response.status + response.statusText);
@@ -136,7 +136,7 @@ export const addPromos = (promos) => ({
 export const fetchLeaders = () => (dispatch => {
     dispatch(leadersLoading(true));
 
-    fetch(baseUrl + 'leaders')
+    fetch(apiCallUrl + 'leaders')
     .then(response => {
         if(response.ok) return response;
         var error = new Error('Error: ' + response.status + response.statusText);
@@ -175,7 +175,7 @@ export const addLeaders = (leaders) => ({
 export const postFeedback = (values) => (dispatch => {
     var newFeedback = JSON.parse(JSON.stringify(values));
     newFeedback.date = new Date().toISOString();
-    fetch(baseUrl + 'feedback', {
+    fetch(apiCallUrl + 'feedback', {
         method: "POST",
         body: JSON.stringify(newFeedback),
         headers: {
@@ -215,7 +215,7 @@ export const loginFailure = (errMess) => ({
 
 export const loginUser = (creds) => (dispatch) => {
     dispatch(requestLogin(creds));
-    fetch(baseUrl + 'users/login', {
+    fetch(apiCallUrl + 'users/login', {
         method: "POST",
         body: JSON.stringify(creds),
         headers: {
@@ -281,7 +281,7 @@ export const addFavorites = (fav) => ({
 // export const fetchFavorites = () => (dispatch) => {
 //     dispatch(favoritesLoading(true));
 //     const bearer = 'Bearer ' + localStorage.getItem('token');
-//     return fetch(baseUrl + 'favorites', {
+//     return fetch(apiCallUrl + 'favorites', {
 //         headers: {
 //             'Authentication': bearer
 //         },
@@ -307,7 +307,7 @@ export const fetchFavorites = () => (dispatch) => {
 
     const bearer = 'Bearer ' + localStorage.getItem('token');
 
-    return fetch(baseUrl + 'favorites', {
+    return fetch(apiCallUrl + 'favorites', {
         headers: {
             'Authorization': bearer
         },
@@ -333,7 +333,7 @@ export const fetchFavorites = () => (dispatch) => {
 
 export const postFavorite = (dishId) => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token');
-    fetch(baseUrl + 'favorites', {
+    fetch(apiCallUrl + 'favorites', {
         body: JSON.stringify({_id: dishId}),
         method: "POST",
         headers: {
@@ -357,7 +357,7 @@ export const postFavorite = (dishId) => (dispatch) => {
 
 export const deleteFavorite = (dishId) => (dispatch) => {
     const bearer = 'Bearer ' + localStorage.getItem('token');
-    fetch(baseUrl + 'favorites/' + dishId, {
+    fetch(apiCallUrl + 'favorites/' + dishId, {
         method: 'DELETE',
         headers: {
             'Content-Type': "application/json",

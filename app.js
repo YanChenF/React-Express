@@ -42,8 +42,7 @@ app.use(session({
   name: 'session-id',
   secret: '123-4456-79980',
   resave: false,
-  saveUninitialized: false,
-  store: new FileStore()
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -64,7 +63,7 @@ app.use('/api/users', usersRouter);
 
 // app.use(auth);
 
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/api/dishes', dishesRouter);
 app.use('/api/promotions', promosRouter);
