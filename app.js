@@ -18,7 +18,7 @@ var promosRouter = require('./routes/promoRouter');
 var favoriteRouter = require('./routes/favoriteRouter');
 var commentRouter = require('./routes/commentRouter');
 
-const url = process.env.DATABASEURL;
+const url = process.env.DATABASEURL || config.mongoUrl;
 const connect = mongoose.connect(url, {useNewUrlParser: true});
 
 connect.then((db) => {
